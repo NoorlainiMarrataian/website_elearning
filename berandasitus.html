@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda Situs – IE ULM Integrated eLearning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --brand: #c24e00;
+        --brand-dark: #922b21;
+        --brand-light: #e74c3c;
+        --accent: #27ae60;
+        --accent-dark: #1e8449;
+        --sidebar-bg: #2c2c2c;
+        --sidebar-w: 190px;
+        --topbar-h: 58px;
+        --body-bg: #f0f0f0;
+        --card-bg: #ffffff;
+        --text: #333;
+        --text-muted: #777;
+        --border: #ddd;
+        --link: #c0392b;
+        --radius: 6px;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        background: var(--body-bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── TOPBAR ── */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: var(--topbar-h);
+        background: var(--brand);
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      }
+      .topbar-hamburger {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        line-height: 1;
+        padding: 6px;
+        border-radius: var(--radius);
+        transition: background 0.15s;
+        display: flex;
+        align-items: center;
+      }
+      .topbar-hamburger:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .topbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .topbar-logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+      }
+      .topbar-brand-text {
+        line-height: 1.25;
+      }
+      .topbar-brand-text .name {
+        color: #fff;
+        font-weight: 800;
+        font-size: 18px;
+        font-family: "Nunito", sans-serif;
+        display: block;
+        letter-spacing: 0.5px;
+      }
+      .topbar-brand-text .sub1 {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 9.5px;
+        display: block;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .topbar-brand-text .sub2 {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 8.5px;
+        display: block;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+      }
+
+      .topbar-spacer {
+        flex: 1;
+      }
+
+      .topbar-icon {
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 6px 8px;
+        border-radius: var(--radius);
+        transition: background 0.15s;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .topbar-icon:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .notif-dot {
+        position: absolute;
+        top: 5px;
+        right: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #f1c40f;
+        border: 1.5px solid var(--brand);
+      }
+
+      .topbar-user {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: var(--radius);
+        transition: background 0.15s;
+      }
+      .topbar-user:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .topbar-user .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .topbar-user .chevron {
+        font-size: 10px;
+        opacity: 0.8;
+      }
+
+      .lang-btn {
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        background: none;
+        border-radius: var(--radius);
+        padding: 3px 9px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .lang-btn.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #fff;
+      }
+
+      /* ── LAYOUT SHELL ── */
+      .shell {
+        display: flex;
+        margin-top: var(--topbar-h);
+        flex: 1;
+      }
+
+      /* ── SIDEBAR ── */
+      .sidebar {
+        width: var(--sidebar-w);
+        background: var(--sidebar-bg);
+        min-height: calc(100vh - var(--topbar-h));
+        flex-shrink: 0;
+        padding-top: 8px;
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 18px;
+        color: #ccc;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          background 0.15s,
+          color 0.15s;
+        border-left: 3px solid transparent;
+      }
+      .sidebar-item:hover {
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+      }
+      .sidebar-item.active {
+        background: var(--brand);
+        color: #fff;
+        border-left-color: #fff;
+      }
+      .sidebar-item .ico {
+        font-size: 18px;
+        width: 24px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+      }
+
+      /* ── MAIN CONTENT ── */
+      .main {
+        flex: 1;
+        padding: 20px 18px;
+        display: flex;
+        gap: 18px;
+      }
+      .content-area {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      /* ── SEARCH BAR ── */
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .search-bar input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        font-family: "Open Sans", sans-serif;
+        color: var(--text);
+        background: transparent;
+      }
+      .search-bar input::placeholder {
+        color: #aaa;
+      }
+      .search-bar button {
+        background: var(--brand);
+        border: none;
+        padding: 0 14px;
+        height: 42px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+      }
+      .search-bar button:hover {
+        background: var(--brand-dark);
+      }
+
+      /* ── DAFTAR KATEGORI KURSUS ── */
+      .category-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .category-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+      .category-item:last-child {
+        border-bottom: none;
+      }
+      .category-item:hover {
+        background: #fdf5f2;
+      }
+      .category-item .arrow {
+        color: var(--brand);
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .category-item .cat-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        flex: 1;
+      }
+      .category-item .cat-count {
+        font-size: 12.5px;
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      /* ── RIGHT COLUMN ── */
+      .right-col {
+        width: 210px;
+        flex-shrink: 0;
+      }
+
+      .widget {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .widget-header {
+        padding: 10px 14px 10px;
+        font-family: "Nunito", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--brand);
+        border-bottom: 1px solid var(--border);
+      }
+
+      /* Daftar kategori kanan */
+      .cat-right-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .cat-right-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--brand);
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        transition: background 0.15s;
+      }
+      .cat-right-item:last-child {
+        border-bottom: none;
+      }
+      .cat-right-item:hover {
+        background: #fdf5f2;
+      }
+      .cat-right-item.active {
+        background: var(--brand);
+        color: #fff;
+      }
+      .cat-right-item .ico {
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #1a1a1a;
+        color: rgba(255, 255, 255, 0.55);
+        text-align: center;
+        font-size: 12px;
+        padding: 12px;
+      }
+      footer a {
+        color: var(--brand-light);
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      .footer-links {
+        background: #fff;
+        display: flex;
+        gap: 20px;
+        padding: 10px 20px;
+        font-size: 12px;
+        border-top: 1px solid var(--border);
+      }
+      .footer-links a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 760px) {
+        .sidebar {
+          display: none;
+        }
+        .right-col {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══ TOPBAR ══ -->
+    <header class="topbar">
+      <button class="topbar-hamburger" onclick="toggleSidebar()" title="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <a class="topbar-brand" href="#">
+        <div class="topbar-logo">
+          <img src="img/logo.png" alt="Logo ULM" style="width: 38px; height: 38px; object-fit: contain" />
+        </div>
+        <div class="topbar-brand-text">
+          <span class="name">iE ULM</span>
+          <span class="sub1">INTEGRATED ELEARNING</span>
+          <span class="sub2">UNIVERSITAS LAMBUNG MANGKURAT</span>
+        </div>
+      </a>
+
+      <div class="topbar-spacer"></div>
+
+      <button class="topbar-icon" title="Notifikasi">
+        <i class="bi bi-bell"></i>
+        <span class="notif-dot"></span>
+      </button>
+
+      <div class="topbar-user">
+        <div class="avatar"><i class="bi bi-person-circle"></i></div>
+        Noorlaini Marratain Laini
+        <span class="chevron"><i class="bi bi-chevron-down"></i></span>
+      </div>
+
+      <button class="lang-btn active">En</button>
+      <button class="lang-btn">Id</button>
+    </header>
+
+    <!-- ══ SHELL ══ -->
+    <div class="shell">
+      <!-- SIDEBAR -->
+      <nav class="sidebar" id="sidebar">
+        <a class="sidebar-item" href="dashboard.html">
+          <span class="ico"><i class="bi bi-house-door-fill"></i></span> Dasbor
+        </a>
+        <a class="sidebar-item active" href="berandasitus.html">
+          <span class="ico"><i class="bi bi-globe"></i></span> Beranda Situs
+        </a>
+        <a class="sidebar-item" href="kalendar.html">
+          <span class="ico"><i class="bi bi-calendar"></i></span> Kalendar
+        </a>
+        <a class="sidebar-item" href="backup.html">
+          <span class="ico"><i class="bi bi-archive"></i></span> Backup
+        </a>
+      </nav>
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="content-area">
+          <!-- Search bar -->
+          <div class="search-bar">
+            <input type="text" placeholder="Cari Kursus" id="searchInput" oninput="filterCategories()" />
+            <button><i class="bi bi-search"></i></button>
+          </div>
+
+          <!-- Daftar kategori / program studi -->
+          <div class="category-list" id="categoryList">
+            <a class="category-item" href="#" data-name="s-2 administrasi pembangunan">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Administrasi Pembangunan</span>
+              <span class="cat-count">(11)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 pengelolaan sumber daya alam lingkungan">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Pengelolaan Sumber Daya Alam &amp; Lingkungan</span>
+              <span class="cat-count">(13)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 manajemen pendidikan">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Manajemen Pendidikan</span>
+              <span class="cat-count">(20)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 keguruan ipa">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Keguruan IPA</span>
+              <span class="cat-count">(10)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 ilmu kehutanan">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Ilmu Kehutanan</span>
+              <span class="cat-count">(14)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 ilmu perikanan">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Ilmu Perikanan</span>
+              <span class="cat-count">(9)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-3 ilmu pertanian">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-3 Ilmu Pertanian</span>
+              <span class="cat-count">(24)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s2-2 pendidikan biologi">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S2-2 Pendidikan Biologi</span>
+              <span class="cat-count">(10)</span>
+            </a>
+            <a class="category-item" href="#" data-name="s-2 pendidikan ips">
+              <span class="arrow"><i class="bi bi-caret-right-fill"></i></span>
+              <span class="cat-name">S-2 Pendidikan IPS</span>
+              <span class="cat-count">(14)</span>
+            </a>
+          </div>
+        </div>
+        <!-- /content-area -->
+
+        <!-- RIGHT COLUMN -->
+        <aside class="right-col">
+          <div class="widget">
+            <div class="widget-header">Kategori Kursus</div>
+            <div class="cat-right-list">
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS KEDOKTERAN GIGI </a>
+              <a class="cat-right-item active" href="#"> <i class="bi bi-mortarboard-fill ico"></i> PROGRAM PASCASARJANA </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS TEKNIK </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS PERIKANAN DAN ILMU KELAUTAN </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS KEHUTANAN </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS PERTANIAN </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS ILMU SOSIAL DAN ILMU POLITIK </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS HUKUM </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS KEGURUAN DAN ILMU PENGETAHUAN </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> FAKULTAS EKONOMI DAN BISNIS </a>
+              <a class="cat-right-item" href="#"> <i class="bi bi-mortarboard-fill ico"></i> Miscellaneous </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <!-- /main -->
+    </div>
+    <!-- /shell -->
+
+    <!-- FOOTER -->
+    <div class="footer-links">
+      <a href="#"><i class="bi bi-database"></i> Data retention summary</a>
+      <a href="#"><i class="bi bi-phone"></i> Get the mobile app</a>
+    </div>
+    <footer>
+      Copyright &copy; 2021 – Developed by UPT PTIK. Powered by
+      <a href="https://moodle.org" target="_blank">Moodle</a>
+    </footer>
+
+    <script>
+      // ── Sidebar toggle ──
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        sb.style.display = sb.style.display === "none" ? "" : "none";
+      }
+
+      // ── Filter kategori ──
+      function filterCategories() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        document.querySelectorAll(".category-item").forEach((item) => {
+          const name = item.dataset.name || "";
+          item.style.display = name.includes(q) ? "" : "none";
+        });
+      }
+
+      // ── Highlight kategori kanan saat diklik ──
+      document.querySelectorAll(".cat-right-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelectorAll(".cat-right-item").forEach((i) => i.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+
+      // ── Language toggle ──
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".lang-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>

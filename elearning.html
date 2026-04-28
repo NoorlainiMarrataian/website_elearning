@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Menu E-Learning | IE ULM Integrated Learning</title>
+  <!-- Google Fonts & Bootstrap Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #c24e00;
+      --primary-dark: #a23f00;
+      --primary-deep: #7a2e00;
+      --secondary: #10512C;
+      --secondary-dark: #0D4526;
+      --gray-50: #f9fafc;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --white: #ffffff;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #f7f9fc 0%, #eef2f5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--primary);
+      backdrop-filter: blur(0px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .logo-wrapper {
+      background: var(--white);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s;
+    }
+    .logo-wrapper:hover {
+      transform: scale(1.02);
+    }
+    .logo-wrapper img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      line-height: 1.2;
+    }
+    .brand-text .name {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.3px;
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .brand-text .sub1 {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      display: block;
+    }
+    .brand-text .sub2 {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      border-radius: 40px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(0.96);
+    }
+    .notif-badge {
+      position: relative;
+    }
+    .dot {
+      position: absolute;
+      top: 9px;
+      right: 11px;
+      width: 9px;
+      height: 9px;
+      background: #f5b042;
+      border-radius: 50%;
+      border: 1.5px solid var(--primary);
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 60px;
+      padding: 6px 16px 6px 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .user-menu:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+    .avatar-icon {
+      font-size: 28px;
+      color: white;
+    }
+    .user-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      letter-spacing: -0.2px;
+    }
+    .chev-small {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .lang-group {
+      display: flex;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 4px;
+      border-radius: 48px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      transition: 0.15s;
+      font-family: inherit;
+    }
+    .lang-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===== MAIN CONTENT (FULL WIDTH, NO SIDEBAR) ===== */
+    .main-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 80px;
+    }
+
+    .menu-grid {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 40px;
+      margin: 0 auto;
+    }
+
+    /* elegant cards */
+    .elearning-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(0px);
+    }
+    .elearning-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background: linear-gradient(105deg, var(--primary) 0%, #df5a1a 100%);
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .card-header h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.3px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .card-badge {
+      background: rgba(255,255,240,0.25);
+      width: 52px;
+      height: 52px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      font-size: 30px;
+      color: white;
+    }
+
+    .card-body {
+      padding: 32px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+    }
+    .desc-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--gray-700);
+      text-align: center;
+      font-weight: 500;
+      background: var(--gray-50);
+      padding: 16px 12px;
+      border-radius: var(--radius-lg);
+      width: 100%;
+    }
+    .btn-access {
+      background: var(--secondary);
+      border: none;
+      border-radius: 60px;
+      padding: 14px 42px;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: inherit;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 12px rgba(39, 174, 96, 0.25);
+    }
+    .btn-access i {
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+    .btn-access:hover {
+      background: var(--secondary-dark);
+      transform: scale(1.02);
+      box-shadow: 0 8px 18px rgba(39, 174, 96, 0.35);
+    }
+    .btn-access:hover i {
+      transform: translateX(4px);
+    }
+
+    /* footer extras */
+    .footer-links-bar {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 16px 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links-bar a {
+      color: var(--gray-700);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .footer-links-bar a:hover {
+      color: var(--primary);
+    }
+    .copyright {
+      background: #111827;
+      color: #9ca3af;
+      text-align: center;
+      padding: 16px 20px;
+      font-size: 0.75rem;
+      letter-spacing: 0.3px;
+    }
+    .copyright a {
+      color: #f97316;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .copyright a:hover {
+      text-decoration: underline;
+    }
+
+        /* === INFO BOX (klik) === */
+    .info-box {
+      display: none;
+      margin-top: 12px;
+      background: #111827;
+      color: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .info-box.show {
+      display: block;
+    }
+
+    /* tombol kecil bantu */
+    .btn-info-toggle {
+      background: transparent;
+      border: 2px dashed var(--gray-300);
+      color: var(--gray-700);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-info-toggle:hover {
+      background: var(--gray-100);
+    }
+
+    /* responsive */
+    @media (max-width: 780px) {
+      .topbar {
+        padding: 0 16px;
+        height: 64px;
+      }
+      .brand-text .name {
+        font-size: 18px;
+      }
+      .user-name {
+        display: none;
+      }
+      .user-menu {
+        padding: 4px 10px;
+      }
+      .lang-group {
+        display: none;
+      }
+      .menu-grid {
+        gap: 28px;
+        padding: 0 8px;
+      }
+      .card-header h2 {
+        font-size: 1.3rem;
+      }
+      .desc-text {
+        font-size: 0.9rem;
+      }
+      .main-container {
+        padding: 40px 16px 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lang-group {
+        display: none;
+      }
+      .btn-access {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+      }
+      .card-body {
+        padding: 24px 18px 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR — without sidebar hamburger, streamlined -->
+  <header class="topbar">
+    <a class="brand-area" href="#">
+      <div class="logo-wrapper">
+        <!-- data:image placeholder + actual style, but using inline simple logo representation -->
+        <img src="img/logo.png"
+             alt="Logo ULM" style="width: 40px; height: 40px;" />
+      </div>
+      <div class="brand-text">
+        <span class="name">iE ULM</span>
+        <span class="sub1">INTEGRATED ELEARNING</span>
+        <span class="sub2">UNIVERSITAS LAMBUNG MANGKURAT</span>
+      </div>
+    </a>
+
+    <div class="top-actions">
+      <div class="icon-btn notif-badge">
+        <i class="bi bi-bell-fill"></i>
+        <span class="dot"></span>
+      </div>
+      <div class="user-menu">
+        <i class="bi bi-person-circle avatar-icon"></i>
+        <span class="user-name">Noorlaini M.L.</span>
+        <i class="bi bi-chevron-down chev-small"></i>
+      </div>
+      <div class="lang-group">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="id">ID</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN AREA : DUAL CARD FOCUS, no sidebar -->
+  <div class="main-container">
+    <div class="menu-grid">
+      <!-- Card 1: Backup Semester 2025 -->
+      <div class="elearning-card" id="cardBackup">
+        <div class="card-header">
+          <div class="card-badge"><i class="bi bi-archive"></i></div>
+          <h2>📚 E-LEARNING BACKUP <br> SEMESTER 2025</h2>
+        </div>
+        <div class="card-body">
+          <div class="desc-text">
+            <i class="bi bi-journal-bookmark-fill" style="margin-right: 6px; color: #c24e00;"></i> 
+            Akses materi arsip, rekam kuliah, dan bank soal semester 2025. Perkuat pemahaman dengan konten revisi lengkap.
+          </div>
+          <button class="btn-access" onclick="navigateTo('backup.html')">
+            <span>Masuk Ruang Arsip</span> <i class="bi bi-box-arrow-up-right"></i>
+          </button>
+          <button class="btn-info-toggle" onclick="toggleInfo('infoBackup')">
+            ℹ️ Apa ini?
+          </button>
+
+          <div class="info-box" id="infoBackup">
+            📁 Ini adalah tempat menyimpan materi lama. <br>
+            Kamu bisa membuka ulang pelajaran sebelumnya untuk belajar lagi.
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Semester Berjalan (Active) -->
+      <div class="elearning-card" id="cardActive">
+        <div class="card-header">
+          <div class="card-badge"><i class="bi bi-lightbulb"></i></div>
+          <h2>🎓 E-LEARNING <br> SEMESTER BERJALAN</h2>
+        </div>
+        <div class="card-body">
+          <div class="desc-text">
+            <i class="bi bi-clock-history" style="margin-right: 6px; color: #27ae60;"></i> 
+            Kursus aktif, tugas terbaru, dan materi sesuai kontrak kuliah semester ini. Pantau progres belajarmu.
+          </div>
+          <button class="btn-access" onclick="navigateTo('dashboard.html')">
+            <span>Lanjut Belajar</span> <i class="bi bi-arrow-right-circle"></i>
+          </button>
+          <button class="btn-info-toggle" onclick="toggleInfo('infoActive')">
+            ℹ️ Apa ini?
+          </button>
+
+          <div class="info-box" id="infoActive">
+            🎓 Ini adalah kelas yang sedang berjalan sekarang. <br>
+            Kamu belajar dan mengerjakan tugas di sini.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER LINKS (privacy, mobile app, etc) -->
+  <div class="footer-links-bar">
+    <a href="#"><i class="bi bi-database"></i> Data retention summary</a>
+    <a href="#"><i class="bi bi-phone"></i> Get the mobile app</a>
+    <a href="#"><i class="bi bi-shield-lock"></i> Privacy & security</a>
+    <a href="#"><i class="bi bi-question-circle"></i> Help center</a>
+  </div>
+  <div class="copyright">
+    Copyright &copy; 2021 – Developed by UPT PTIK. Powered by 
+    <a href="https://moodle.org" target="_blank" rel="noopener">Moodle</a> &nbsp;|&nbsp; 
+    <a href="#">Accessibility</a> &nbsp;|&nbsp; 
+    <a href="#">Contact</a>
+  </div>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const backupDesc = document.querySelector('#cardBackup .desc-text');
+    const activeDesc = document.querySelector('#cardActive .desc-text');
+    const backupBtn = document.querySelector('#cardBackup .btn-access span');
+    const activeBtn = document.querySelector('#cardActive .btn-access span');
+
+    // content definitions
+    const translations = {
+      en: {
+        backupDesc: "Access 2025 semester archive: lecture recordings & review modules. Keep your knowledge fresh.",
+        activeDesc: "Current semester courses, active assignments, and enrolled subjects. Track your progress in real time.",
+        backupBtn: "Enter Archive",
+        activeBtn: "Continue Learning"
+      },
+      id: {
+        backupDesc: "Akses arsip semester 2025: rekaman kuliah dan modul review. Agar materi selalu diingat.",
+        activeDesc: "Kursus semester berjalan, tugas aktif, dan mata kuliah yang dikontrak. Pantau progres belajarmu.",
+        backupBtn: "Masuk Arsip",
+        activeBtn: "Lanjut Belajar"
+      }
+    };
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.en;
+      if (backupDesc) backupDesc.innerHTML = `<i class="bi bi-journal-bookmark-fill" style="margin-right: 6px; color: #c24e00;"></i> ${t.backupDesc}`;
+      if (activeDesc) activeDesc.innerHTML = `<i class="bi bi-clock-history" style="margin-right: 6px; color: #27ae60;"></i> ${t.activeDesc}`;
+      if (backupBtn) backupBtn.innerText = t.backupBtn;
+      if (activeBtn) activeBtn.innerText = t.activeBtn;
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const langVal = btn.getAttribute('data-lang');
+        // update active UI
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (langVal === 'en') applyLanguage('en');
+        else if (langVal === 'id') applyLanguage('id');
+      });
+    });
+
+    applyLanguage('en');
+
+    function navigateTo(page) {
+      if (page === 'backup.html') {
+        if (confirm("🚀 Mengarahkan ke halaman Backup Semester (simulasi).\nKlik OK untuk lanjut.")) {
+          window.location.href = page;
+        }
+      } else if (page === 'dashboard.html') {
+        if (confirm("✨ Mengarahkan ke Dasbor E-Learning Semester Berjalan.\nOK untuk melanjutkan.")) {
+          window.location.href = page;
+        }
+      } else {
+        window.location.href = page;
+      }
+    }
+
+    const notifBtn = document.querySelector('.icon-btn.notif-badge');
+    if (notifBtn) {
+      notifBtn.addEventListener('click', () => {
+        alert("🔔 Belum ada notifikasi baru. Silakan cek kembali nanti.");
+      });
+    }
+
+    const userMenuDiv = document.querySelector('.user-menu');
+    if (userMenuDiv) {
+      userMenuDiv.addEventListener('click', () => {
+        alert("👤 Noorlaini Marratain Laini\n📧 noorlaini@ulm.ac.id\nRole: Mahasiswa / Dosen\nPengaturan akun dapat diakses nanti.");
+      });
+    }
+
+    function toggleInfo(id) {
+    const el = document.getElementById(id);
+
+    document.querySelectorAll('.info-box').forEach(box => {
+      if (box.id !== id) box.classList.remove('show');
+    });
+
+    el.classList.toggle('show');
+   }
+
+    if (window.toggleSidebar) window.toggleSidebar = undefined;
+
+    // additional styles for focus/accessibility
+    const style = document.createElement('style');
+    style.textContent = `
+      .btn-access:focus-visible, .icon-btn:focus-visible, .lang-btn:focus-visible {
+        outline: 3px solid #ffb347;
+        outline-offset: 2px;
+      }
+      .elearning-card {
+        transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
